@@ -76,6 +76,8 @@ header nav ul li:last-child a {
 .about {
     background-image: url(../images/bg-about.png);
     background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     width: 100%;
     height: 907px;
 }
@@ -93,9 +95,10 @@ header nav ul li:last-child a {
 }
 
 .about .overlay h1{
-    font-size: 98px;
+    font-size: 80px;
 }
 
 .about .overlay p{
-    font-size: 40px;
+    width: 70%;
+    font-size: 30px;
 }
