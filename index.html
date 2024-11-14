@@ -8,34 +8,117 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Gaya tombol carousel */
+        .carousel-button {
+            width: 30px;
+            height: 30px;
+            background-color: gray;
+            border: none;
+            border-radius: 50%;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Gaya tombol ketika aktif (putih) */
+        .carousel-button.active {
+            background-color: white;
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <nav>
             <ul>
-                <li>
-                    <a href="/">PT JYN GROUP INDONESIA</a>
-                </li>
-                <li>
-                    <a href="/">OUR BUSINESS LINE</a>
-                </li>
+                <li><a href="/">PT JYN GROUP INDONESIA</a></li>
+                <li><a href="/">OUR BUSINESS LINE</a></li>
             </ul>
         </nav>
     </header>
+    
     <section class="about">
         <div class="overlay">
             <h1>ABOUT US</h1>
             <p>JYN is a company established in 2022</p>
-            <p>by an international team of people</p>
-            <p>with a deep knowledge of the Indonesian market </p>
-            <p>and with a strong experience in food transformation and in</p>
-            <p>digital solutions applied to traditional and precision agriculture</p>
+            <p>by an international team of people</p>
+            <p>with a deep knowledge of the Indonesian market</p>
+            <p>and with a strong experience in food transformation and in digital solutions applied to traditional and precision agriculture</p>
         </div>
     </section>
+    
+    <section class="hero">
+        <div class="carousel-images" id="carouselImages">
+            <div class="carousel-image-container">
+                <img src="/images/carousel-1.png" alt="Gambar 1">
+                <div class="overlay">
+                    <img src="/images/JYN COFFEE LOGO.png" alt="logo JYN" class="image-1">
+                    <h2>JYN Coffee Green Beans is an Indonesian Producer</h2>
+                    <h2>found in 2022</h2>
+                </div>
+            </div>
+            <div class="carousel-image-container">
+                <img src="/images/bg-about.png" alt="Gambar 2" >
+                <div class="overlay"><img src="/images/JYN agri.png" alt="logo JYN" class="image-2">
+                    <h2>Implementing the Indonesian way</h2>
+                    <h2>to a profitable and sustainable agriculture</h2></div>
+            </div>
+        </div>
+        
+        <div class="carousel-bullet">
+            <button class="carousel-button" onclick="prevSlide()" id="prevButton"></button>
+            <button class="carousel-button" onclick="nextSlide()" id="nextButton"></button>
+        </div>
+    </section>
+    
+    <script>
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.carousel-image-container');
+            const totalSlides = slides.length;
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            
+            // Mengatur index slide
+            if (index >= totalSlides) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = totalSlides - 1;
+            } else {
+                currentIndex = index;
+            }
+
+            // Mengubah warna tombol berdasarkan posisi slide
+            if (currentIndex === 0) {
+                prevButton.classList.add('active');
+                nextButton.classList.remove('active');
+            } else if (currentIndex === totalSlides - 1) {
+                nextButton.classList.add('active');
+                prevButton.classList.remove('active');
+            } else {
+                prevButton.classList.remove('active');
+                nextButton.classList.remove('active');
+            }
+
+            // Menggeser gambar
+            const offset = -currentIndex * 100;
+            document.getElementById('carouselImages').style.transform = `translateX(${offset}%)`;
+        }
+
+        function nextSlide() {
+            showSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentIndex - 1);
+        }
+
+        // Otomatis beralih slide setiap 3 detik
+        setInterval(nextSlide, 3000);
+    </script>
 </body>
 
 </html>
